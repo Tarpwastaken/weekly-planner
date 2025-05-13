@@ -1,0 +1,382 @@
+/* Weekly Planner Container */
+.planner {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "sun mon tue wed thu"
+        "fri sat . . .";
+    gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.day:nth-child(1) { grid-area: sun; }
+.day:nth-child(2) { grid-area: mon; }
+.day:nth-child(3) { grid-area: tue; }
+.day:nth-child(4) { grid-area: wed; }
+.day:nth-child(5) { grid-area: thu; }
+.day:nth-child(6) { grid-area: fri; }
+.day:nth-child(7) { grid-area: sat; }
+
+
+
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+
+
+
+
+/* Day Boxes */
+.day {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.day:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.day h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.day ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+}
+
+.day ul li {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .planner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .planner {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+/* Button Styles */
+button {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #555555;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #222222;
+    transform: translateY(0);
+}
+
+button:disabled {
+    background-color: #777777;
+    cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+/* Modernized Monochrome Checkbox Styles */
+.checkbox-container label {
+    font-size: 1.75rem; /* Increase text size */
+    font-weight: 800; /* Make text even bolder */
+    color: #212529; /* Ensure good contrast */
+    margin-left: 10px; /* Add spacing between checkbox and text */
+}
+/* Add spacing between blocks */
+.planner {
+    row-gap: 25px; /* Increase vertical spacing between rows */
+    column-gap: 25px; /* Increase horizontal spacing between columns */
+}
+
+.day {
+    margin: 10px; /* Add margin around each day block */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add spacing between buttons and checkmarks */
+}
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox and text vertically */
+    font-size: 1.25rem; /* Make text larger */
+    font-weight: bold; /* Make text bolder */
+}
+input[type="checkbox"] {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #6c757d;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    margin-right: 10px; /* Add spacing between checkbox and text */
+    vertical-align: middle; /* Align checkbox with text */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox and text vertically */
+}
+
+input[type="checkbox"]:checked {
+    background-color: #000000;
+    border-color: #000000;
+    position: relative;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: #ffffff;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+
+
+
+/* Pin Input Styles - Simplified Square Design */
+.pin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height to center vertically */
+    gap: 20px; /* Space between pin input and keypad */
+    background-color: #343a40; /* Darker background for pin area */
+    padding: 20px; /* Add padding to prevent content from touching edges */
+    box-sizing: border-box; /* Include padding in height/width calculations */
+    opacity: 1; /* Default opacity */
+    transform: translateY(0); /* Default position */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth fade and slide */
+}
+
+.pin-container.hidden {
+    opacity: 0; /* Fade out */
+    transform: translateY(-50px); /* Slide up */
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.pin-input {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Increased space between pin boxes */
+}
+
+.pin-input input {
+    width: 60px; /* Increased square size */
+    height: 60px; /* Increased square size */
+    text-align: center;
+    font-size: 1.5rem; /* Larger font size for better visibility */
+    border: 2px solid #6c757d;
+    border-radius: 5px; /* Slightly rounded corners */
+    background-color: #f8f9fa;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    pointer-events: none; /* Prevent direct typing */
+}
+
+.pin-input input:focus {
+    border-color: #495057;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.pin-input input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* Increased space between buttons */
+}
+
+.keypad button {
+    width: 70px; /* Increased square button size */
+    height: 70px; /* Increased square button size */
+    font-size: 1.5rem; /* Larger font size for digits */
+    font-weight: bold;
+    color: #f8f9fa; /* Light text for better contrast */
+    background-color: #495057; /* Darker button background */
+    border: 2px solid #6c757d;
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.keypad button:hover {
+    background-color: #6c757d;
+    border-color: #adb5bd;
+    transform: translateY(-2px);
+}
+
+.keypad button:active {
+    background-color: #adb5bd;
+    border-color: #343a40;
+    transform: translateY(0);
+}
+
+.keypad button:disabled {
+    background-color: #dee2e6;
+    border-color: #adb5bd;
+    cursor: not-allowed;
+}
+
+
+
+
+/* Password Input Styles */
+
+.password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height to center vertically */
+    gap: 20px; /* Space between password input and button */
+    background-color: #343a40; /* Darker background for password area */
+    padding: 20px; /* Add padding to prevent content from touching edges */
+    box-sizing: border-box; /* Include padding in height/width calculations */
+    opacity: 1; /* Default opacity */
+    transform: translateY(0); /* Default position */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth fade and slide */
+}
+
+.password-container.hidden {
+    opacity: 0; /* Fade out */
+    transform: translateY(-50px); /* Slide up */
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.password-container input[type="password"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.password-container input[type="password"]:focus {
+    border-color: #000000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+.password-container button {
+    width: 100%;
+    max-width: 300px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.password-container button:hover {
+    background-color: #333333;
+    transform: translateY(-2px);
+}
+
+.password-container button:active {
+    background-color: #111111;
+    transform: translateY(0);
+}
