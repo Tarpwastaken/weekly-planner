@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #FFA500; /* Orange */
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        main {
+            text-align: center;
+        }
+        button {
+            padding: 20px 30px;
+            font-size: 1.5rem;
+            background-color: #800080; /* Purple */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #9932CC; /* Darker Purple */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Recipe Viewer</h1>
+    </header>
+    <main>
+        <p style="font-size: 1.5rem; font-weight: bold;">Click the button below to choose a recipe:</p>
+        <button onclick="openDocs()">View Recipes</button>
+    </main>
+    <script>
+        // Function to open a popup to choose an individual Google Doc
+        function openDocs() {
+            const googleDocs = {
+                'Mac n\' Cheese': 'https://docs.google.com/document/d/1UNwQwCF_g9xILM3VSfDDlNZhaGEU8lfFFHPxtLHL-pY/edit?usp=sharing',
+                'Chile Verde': 'https://docs.google.com/document/d/1ZegTDq0Gh37h2_0tvy9gTh5D4e3G23deseBWewmx5F8/edit?usp=sharing',
+                'Chicken Enchiladas': 'https://docs.google.com/document/d/1ELfzqtaIzo6jXGTh1o86vgERIAQuk42pV3KdP_BAzAk/edit?usp=sharing',
+                'Penne Bolognese': 'https://docs.google.com/document/d/18aErgM8qbRmGi3D8FPrUdxqGBK2rf4fIShdzLDvcB7I/edit?usp=sharing',
+                'Tuscan Chicken Pasta': 'https://docs.google.com/document/d/1K9IO7JyB9Xmh82MYMHIoCnU6KUarTfJtGalIyVoZD2M/edit?usp=sharing',
+                'Beef Stroganoff': 'https://docs.google.com/document/d/178hO4Gl2lwd-GOCgPXmwjgxE-6aTIu2YtbhRCvInrFw/edit?usp=sharing',
+                'Chicken Alfredo': 'https://docs.google.com/document/d/1sPrzIJu9fDKFfS9IQT6zkEC_dLDRWVk9eL1npy4yzoQ/edit?usp=sharing'
+            };
+
+            // Create a selection popup container
+            const selectionPopup = document.createElement('div');
+            selectionPopup.style.position = 'fixed';
+            selectionPopup.style.top = '50%';
+            selectionPopup.style.left = '50%';
+            selectionPopup.style.transform = 'translate(-50%, -50%)';
+            selectionPopup.style.backgroundColor = '#fff';
+            selectionPopup.style.padding = '20px';
+            selectionPopup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            selectionPopup.style.zIndex = '1000';
+            selectionPopup.style.borderRadius = '8px';
+            selectionPopup.style.width = '300px';
+
+            // Add a title
+            const title = document.createElement('h3');
+            title.textContent = 'Choose a Recipe';
+            title.style.marginBottom = '10px';
+            selectionPopup.appendChild(title);
+
+            // Add a close button
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.style.marginBottom = '10px';
+            closeButton.onclick = () => document.body.removeChild(selectionPopup);
+            selectionPopup.appendChild(closeButton);
+
+            // Add buttons for each Google Doc
+            Object.keys(googleDocs).forEach(docName => {
+                const button = document.createElement('button');
+                button.textContent = docName;
+                button.style.display = 'block';
+                button.style.margin = '5px 0';
+                button.onclick = () => {
+                    document.body.removeChild(selectionPopup);
+                    displayDoc(googleDocs[docName], docName);
+                };
+                selectionPopup.appendChild(button);
+            });
+
+            // Append the selection popup to the body
+            document.body.appendChild(selectionPopup);
+        }
+
+        // Function to display the selected Google Doc in a popup
+        function displayDoc(docUrl, docName) {
+            // Create a Doc display popup container
+            const docPopup = document.createElement('div');
+            docPopup.style.position = 'fixed';
+            docPopup.style.top = '50%';
+            docPopup.style.left = '50%';
+            docPopup.style.transform = 'translate(-50%, -50%)';
+            docPopup.style.backgroundColor = '#fff';
+            docPopup.style.padding = '20px';
+            docPopup.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            docPopup.style.zIndex = '1000';
+            docPopup.style.borderRadius = '8px';
+            docPopup.style.width = '80%';
+            docPopup.style.height = '90%';
+            docPopup.style.overflow = 'auto';
+
+            // Add a close button
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.style.marginBottom = '10px';
+            closeButton.onclick = () => document.body.removeChild(docPopup);
+            docPopup.appendChild(closeButton);
+
+            // Add an iframe to display the Google Doc
+            const iframe = document.createElement('iframe');
+            iframe.src = docUrl;
+            iframe.style.width = '100%';
+            iframe.style.height = 'calc(100% - 40px)';
+            iframe.style.border = 'none';
+            iframe.title = docName;
+
+            docPopup.appendChild(iframe);
+
+            // Append the Doc popup to the body
+            document.body.appendChild(docPopup);
+        }
+    </script>
+</body>
+</html>
